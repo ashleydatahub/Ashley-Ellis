@@ -2,11 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.db import Base, engine
 from app.routers import industries, mentors, sessions, users
-
-# Create all tables (Alembic handles this in production)
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Micro Mentorship API",
