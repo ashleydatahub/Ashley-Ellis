@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #060607;
+  --bg-elevated: #0c0c0f;
+  --fg: #e8e6e3;
+  --fg-muted: #8a8783;
+  --accent: #c4a574;
+  --accent-dim: rgba(196, 165, 116, 0.35);
+  --line: rgba(232, 230, 227, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Syne", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes signal-dash {
+  to { stroke-dashoffset: -400; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.15); }
+}

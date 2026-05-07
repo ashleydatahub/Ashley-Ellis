@@ -1,0 +1,19 @@
+# Next.js
+web/.next/
+web/out/
+web/node_modules/
+
+# FastAPI / Python
+api/.venv/
+api/__pycache__/
+api/**/__pycache__/
+api/*.pyc
+api/.env
+
+# PostgreSQL runtime (standalone binary managed locally)
+.postgres16/data/
+.postgres16/*.log
+
+# Environment
+.env
+.env.local

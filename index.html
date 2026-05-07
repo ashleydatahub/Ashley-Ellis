@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Micro Mentorship — fifteen minutes. real signal.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="signal-band" role="banner">
+      <div class="signal-band__label">
+        <span class="pulse" aria-hidden="true"></span>
+        <span>live saturation index</span>
+      </div>
+      <div class="signal-band__track" aria-live="polite">
+        <div class="signal-band__lines" id="signalLines"></div>
+        <div class="signal-band__marquee" id="marquee"></div>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <a class="nav__mark" href="#">Micro Mentorship</a>
+      <div class="nav__links">
+        <a href="#discover">discover</a>
+        <a href="#how">how it works</a>
+        <a href="#mentors">become a guide</a>
+      </div>
+      <button type="button" class="nav__cta ghost">request access</button>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <p class="hero__eyebrow">marketplace · 15 minutes · no noise</p>
+        <h1 class="hero__title">
+          Borrow an insider’s<br />
+          <em>point of view</em>
+        </h1>
+        <p class="hero__lede">
+          Retired partners, working producers, surgeons who left the OR, lawyers who
+          burned the midnight oil—book a single quarter-hour with someone who has
+          already walked the path you’re weighing.
+        </p>
+        <div class="hero__actions">
+          <button type="button" class="btn primary">enter the waitlist</button>
+          <a class="btn ghost" href="#discover">browse industries</a>
+        </div>
+        <dl class="hero__stats">
+          <div>
+            <dt>session length</dt>
+            <dd>15 min</dd>
+          </div>
+          <div>
+            <dt>format</dt>
+            <dd>voice · video · async note</dd>
+          </div>
+          <div>
+            <dt>intent</dt>
+            <dd>career change · reality check · map the maze</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel" id="discover">
+        <div class="panel__header">
+          <h2>Where attention clusters</h2>
+          <p>
+            Saturation is not judgment—it’s where the crowd is loudest. Use it to
+            pick your angle or avoid the pile-on.
+          </p>
+        </div>
+        <div class="grid" id="industryGrid"></div>
+      </section>
+
+      <section class="panel panel--dim" id="how">
+        <div class="panel__header">
+          <h2>How a micro session works</h2>
+          <p>Enough time for one sharp question and one honest answer.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="steps__n">01</span>
+            <h3>Choose a lane</h3>
+            <p>Filter by industry, former role, or the kind of truth you need.</p>
+          </li>
+          <li>
+            <span class="steps__n">02</span>
+            <h3>Book fifteen</h3>
+            <p>Pick a slot; pay only for the slice you need.</p>
+          </li>
+          <li>
+            <span class="steps__n">03</span>
+            <h3>Leave with a bearing</h3>
+            <p>Notes you can act on—not a course, not a funnel.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel" id="mentors">
+        <div class="split">
+          <div>
+            <h2>Guides, not gurus</h2>
+            <p>
+              If you’ve done the work and you’re willing to be blunt in small doses,
+              this is the quiet side of the market. We verify identity and
+              experience; we don’t script your story.
+            </p>
+            <button type="button" class="btn primary">apply as a guide</button>
+          </div>
+          <div class="secret-card">
+            <p class="secret-card__kicker">confidential</p>
+            <p>
+              Some industries still operate on whispers. Micro Mentorship is built
+              for discretion—minimal profiles, optional pseudonyms for guides where
+              allowed, and clear boundaries before you connect.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© Micro Mentorship. A thin bridge between curiosity and someone who knows.</p>
+      <p class="footer__fine">Saturation metrics are illustrative for the prototype.</p>
+    </footer>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
