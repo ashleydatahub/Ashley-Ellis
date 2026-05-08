@@ -35,7 +35,7 @@ def root():
         "status": "ok",
         "docs": "/docs",
         "health": "/api/health",
-        "website": "https://web-eight-chi-19.vercel.app",
+        "website": "https://micromentorhub.vercel.app",
     }
 
 
