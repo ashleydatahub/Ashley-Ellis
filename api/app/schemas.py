@@ -156,3 +156,27 @@ class TransactionOut(BaseModel):
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+
+# ──────────────────────────────────────────────
+# Waitlist
+# ──────────────────────────────────────────────
+
+class WaitlistCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=128)
+    email: EmailStr
+    role: str = Field("seeker", pattern="^(seeker|guide)$")
+    industry: str = Field("", max_length=128)
+    intent: str = Field("", max_length=255)
+    message: str = Field("", max_length=2000)
+
+
+class WaitlistOut(BaseModel):
+    id: int | None = None
+    name: str
+    email: str
+    role: str
+    industry: str
+    intent: str
+    message: str
+    received: bool = True

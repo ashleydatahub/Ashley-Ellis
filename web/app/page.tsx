@@ -1,6 +1,8 @@
 import { getIndustries } from "@/lib/api";
 import SignalBand from "@/components/SignalBand";
 import IndustryGrid from "@/components/IndustryGrid";
+import WaitlistForm from "@/components/WaitlistForm";
+import CtaButton from "@/components/CtaButton";
 
 const FALLBACK_INDUSTRIES = [
   { id: 1, name: "Software · product",      saturation: 8.7, note: "talent pool depth · high noise" },
@@ -58,19 +60,9 @@ export default async function HomePage() {
           <a href="#how" style={{ color: "var(--fg-muted)", textDecoration: "none" }}>how it works</a>
           <a href="#mentors" style={{ color: "var(--fg-muted)", textDecoration: "none" }}>become a guide</a>
         </div>
-        <button style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: "0.68rem",
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
-          padding: "0.85rem 1.35rem",
-          border: "1px solid var(--line)",
-          background: "transparent",
-          color: "var(--fg)",
-          cursor: "pointer",
-        }}>
+        <CtaButton role="seeker" variant="ghost">
           request access
-        </button>
+        </CtaButton>
       </nav>
 
       <main style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem 4rem" }}>
@@ -88,9 +80,7 @@ export default async function HomePage() {
             Retired partners, working producers, surgeons who left the OR, lawyers who burned the midnight oil—book a single quarter-hour with someone who has already walked the path you&apos;re weighing.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginBottom: "3rem" }}>
-            <button style={{ cursor: "pointer", background: "var(--fg)", color: "var(--bg)", border: "1px solid var(--fg)", padding: "0.85rem 1.35rem", fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase" }}>
-              enter the waitlist
-            </button>
+            <CtaButton role="seeker">enter the waitlist</CtaButton>
             <a href="#discover" style={{ display: "inline-flex", alignItems: "center", padding: "0.85rem 1.35rem", border: "1px solid var(--line)", fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--fg)", textDecoration: "none" }}>
               browse industries
             </a>
@@ -134,16 +124,14 @@ export default async function HomePage() {
         </section>
 
         {/* Guides */}
-        <section id="mentors" style={{ padding: "4rem 0" }}>
+        <section id="mentors" style={{ padding: "4rem 0", borderBottom: "1px solid var(--line)" }}>
           <div style={{ display: "grid", gap: "2rem", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
             <div>
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.75rem,3vw,2.25rem)", fontWeight: 400, margin: "0 0 1rem" }}>Guides, not gurus</h2>
               <p style={{ color: "var(--fg-muted)", margin: "0 0 1.5rem" }}>
                 If you&apos;ve done the work and you&apos;re willing to be blunt in small doses, this is the quiet side of the market. We verify identity and experience; we don&apos;t script your story.
               </p>
-              <button style={{ cursor: "pointer", background: "var(--fg)", color: "var(--bg)", border: "1px solid var(--fg)", padding: "0.85rem 1.35rem", fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase" }}>
-                apply as a guide
-              </button>
+              <CtaButton role="guide">apply as a guide</CtaButton>
             </div>
             <div style={{ background: "rgba(196,165,116,0.06)", border: "1px solid var(--accent-dim)", padding: "1.5rem" }}>
               <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--accent)", margin: "0 0 0.75rem" }}>confidential</p>
@@ -151,6 +139,23 @@ export default async function HomePage() {
                 Some industries still operate on whispers. Micro Mentorship is built for discretion—minimal profiles, optional pseudonyms for guides where allowed, and clear boundaries before you connect.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Waitlist / contact form */}
+        <section id="waitlist" style={{ padding: "4rem 0", scrollMarginTop: "100px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto" }}>
+            <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--fg-muted)", margin: "0 0 1rem", textAlign: "center" }}>
+              join the waitlist
+            </p>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.75rem,3vw,2.25rem)", fontWeight: 400, margin: "0 0 1rem", textAlign: "center", letterSpacing: "-0.02em" }}>
+              Tell us a little about you.
+            </h2>
+            <p style={{ color: "var(--fg-muted)", margin: "0 0 2.5rem", textAlign: "center" }}>
+              Pick a side—looking for a guide, or willing to be one—and we&apos;ll reach out when it&apos;s your turn.
+            </p>
+
+            <WaitlistForm industries={industries} />
           </div>
         </section>
       </main>

@@ -48,6 +48,11 @@ class TransactionType(str, enum.Enum):
     debit = "debit"
 
 
+class WaitlistRole(str, enum.Enum):
+    seeker = "seeker"   # someone looking for guidance
+    guide = "guide"     # someone offering to mentor
+
+
 # ──────────────────────────────────────────────
 # Models
 # ──────────────────────────────────────────────
@@ -166,3 +171,18 @@ class Transaction(Base):
 
     user: Mapped[User] = relationship("User", back_populates="transactions")
     session: Mapped[Session | None] = relationship("Session", back_populates="transactions")
+
+
+class WaitlistEntry(Base):
+    __tablename__ = "waitlist_entries"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(128), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
+    role: Mapped[WaitlistRole] = mapped_column(
+        Enum(WaitlistRole), default=WaitlistRole.seeker
+    )
+    industry: Mapped[str] = mapped_column(String(128), default="")
+    intent: Mapped[str] = mapped_column(String(255), default="")
+    message: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())

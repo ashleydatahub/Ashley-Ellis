@@ -41,3 +41,25 @@ export async function healthCheck(): Promise<{ status: string }> {
   if (!res.ok) throw new Error("API health check failed");
   return res.json();
 }
+
+export interface WaitlistPayload {
+  name: string;
+  email: string;
+  role: "seeker" | "guide";
+  industry: string;
+  intent: string;
+  message: string;
+}
+
+export async function joinWaitlist(payload: WaitlistPayload): Promise<{ received: boolean }> {
+  const res = await fetch(`${API_BASE}/api/waitlist`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || `Request failed (${res.status})`);
+  }
+  return res.json();
+}

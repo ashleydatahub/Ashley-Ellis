@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.auth import require_admin
@@ -8,19 +9,41 @@ from app.schemas import IndustryCreate, IndustryOut
 
 router = APIRouter(prefix="/api/industries", tags=["industries"])
 
+# Returned when no DATABASE_URL is configured or the table doesn't exist yet.
+# This keeps the marketplace browsable end-to-end while production Postgres
+# is being provisioned.
+FALLBACK_INDUSTRIES = [
+    {"id": 1,  "name": "Software · product",      "saturation": 8.7, "note": "talent pool depth · high noise"},
+    {"id": 2,  "name": "Law · corporate",         "saturation": 7.9, "note": "up-or-out paths crowded"},
+    {"id": 3,  "name": "Medicine · clinical",     "saturation": 7.2, "note": "training pipeline saturated"},
+    {"id": 4,  "name": "Music · recording",       "saturation": 6.8, "note": "access easy · breakthrough hard"},
+    {"id": 5,  "name": "Finance · markets",       "saturation": 8.1, "note": "competition for seats"},
+    {"id": 6,  "name": "Design · digital",        "saturation": 7.4, "note": "portfolio density"},
+    {"id": 7,  "name": "Academia · tenure track", "saturation": 8.9, "note": "fewer lines · more PhDs"},
+    {"id": 8,  "name": "Media · journalism",      "saturation": 7.0, "note": "outlets shrink · voices multiply"},
+    {"id": 9,  "name": "Real estate · brokerage", "saturation": 6.2, "note": "cyclical · local variance"},
+    {"id": 10, "name": "Skilled trades",          "saturation": 4.1, "note": "undersupply in many regions"},
+]
+
 
 @router.get("", response_model=list[IndustryOut])
 def list_industries(db: Session = Depends(get_db)):
-    rows = db.query(Industry).order_by(Industry.saturation_tenths.desc()).all()
-    return [
-        IndustryOut(
-            id=r.id,
-            name=r.name,
-            saturation=r.saturation_tenths / 10,
-            note=r.note,
-        )
-        for r in rows
-    ]
+    try:
+        rows = db.query(Industry).order_by(Industry.saturation_tenths.desc()).all()
+        if not rows:
+            return [IndustryOut(**i) for i in FALLBACK_INDUSTRIES]
+        return [
+            IndustryOut(
+                id=r.id,
+                name=r.name,
+                saturation=r.saturation_tenths / 10,
+                note=r.note,
+            )
+            for r in rows
+        ]
+    except SQLAlchemyError:
+        # No DB connection or no table — serve the static fallback list
+        return [IndustryOut(**i) for i in FALLBACK_INDUSTRIES]
 
 
 @router.post("", response_model=IndustryOut, status_code=status.HTTP_201_CREATED)
